@@ -8,10 +8,12 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         const { email, password } = req.body;
 
         const existingUser = await User.findOne({ email });
+
         if (existingUser) {
             res.status(400).json({ message: 'User already exists' });
             return;
         }
+
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ email, password: hashedPassword });
@@ -19,9 +21,9 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
         const token = generateToken(newUser._id.toString());
 
-        await res.status(201).json({ message: 'User registered successfully', token, user: { id: newUser._id, email: newUser.email } });
+        res.status(201).json({ message: 'User registered successfully', token, user: { id: newUser._id, email: newUser.email } });
     } catch (error) {
-        await res.status(500).json({ message: `Error creating user` });
+        res.status(500).json({ message: `Error creating user` });
     }
 };
 
@@ -33,14 +35,14 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            res.status(400).json({ message: 'Invalid credentials' });
+            res.status(401).json({ message: 'Invalid credentials' });
             return;
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {
-            res.status(400).json({ message: 'Invalid credentials' });
+            res.status(401).json({ message: 'Invalid credentials' });
             return;
         }
 
