@@ -7,7 +7,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Welcome to my Ecommerce API!');
+  res.send('Welcome to my Ecommerce API!!!');
 });
 
 export default app;
