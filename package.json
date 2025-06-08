@@ -9,7 +9,7 @@
     "build": "tsc",
     "lint": "eslint 'src/**/*.{ts,js}'",
     "format": "prettier --write .",
-    "test": "set JWT_SECRET=1234 && jest"
+    "test": "export JWT_SECRET=\"1234\" && jest"
   },
   "repository": {
     "type": "git",
