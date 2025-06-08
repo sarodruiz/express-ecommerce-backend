@@ -1,0 +1,29 @@
+name: CI/CD - Run Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Configurar variables de entorno
+        run: echo "MONGO_URI=${{ secrets.JWT_SECRET }}" >> .env
+
+      - name: Ejecutar pruebas
+        run: npm run test
