@@ -11,19 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar el repositorio
+      - name: Clone repository
         uses: actions/checkout@v3
 
-      - name: Configurar Node.js
+      - name: Configure Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: Instalar dependencias
+      - name: Install dependencies
         run: npm install
 
-      - name: Configurar variables de entorno
+      - name: Configure environment variables
         run: echo "MONGO_URI=${{ secrets.JWT_SECRET }}" >> .env
 
-      - name: Ejecutar pruebas
+      - name: Execute tests
         run: npm run test
