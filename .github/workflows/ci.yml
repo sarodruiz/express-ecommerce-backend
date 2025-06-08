@@ -22,8 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Configure environment variables
-        run: echo "MONGO_URI=${{ secrets.JWT_SECRET }}" >> .env
+      # - name: Configure environment variables
+      #   run: echo "MONGO_URI=${{ secrets.JWT_SECRET }}" >> .env
 
       - name: Execute tests
         run: npm run test
