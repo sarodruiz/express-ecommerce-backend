@@ -4,7 +4,7 @@ const productSchema = new mongoose.Schema({
     brand: { type: String, required: true },
     model: { type: String, required: true },
     price: { type: Number, required: true },
-    category: { type: String, required: true, enum: ["cerveza", "vino", "whisky", "vodka"] },
+    category: { type: String, required: true, enum: ["beer", "wine", "whisky", "vodka"] },
     volume: { type: Number, required: true, min: 0 },
     image: { type: String, required: true },
     stock: { type: Number, required: true, min: 0 },
